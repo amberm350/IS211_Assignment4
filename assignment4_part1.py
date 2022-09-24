@@ -3,11 +3,7 @@ import random
 
 
 def get_me_random_list(n):
-    """Generate list of n elements in random order
-    
-    :params: n: Number of elements in the list
-    :returns: A list with n elements in random order
-    """
+
     a_list = list(range(n))
     random.shuffle(a_list)
     return a_list
@@ -66,20 +62,53 @@ def binary_search_recursive(a_list,item):
             else:
                 return binary_search_recursive(a_list[midpoint + 1:], item)
 if __name__ == "__main__":
-    """Main entry point"""
-    the_size = 500
 
-    total_time = 0
-    for i in range(100):
-        mylist = get_me_random_list(the_size)
-        # sorting is not needed for sequential search.
-        mylist = sorted(mylist)
+    the_size = [500, 1000, 10000]
 
-        start = time.time()
-        check = binary_search_iterative(mylist, 99999999)
-        time_spent = time.time() - start
-        total_time += time_spent
+for the_size in the_size:
 
-    avg_time = total_time / 100
-    print(f"Binary Search Iterative took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+        total_time = 0
+        for i in range(100):
+            mylist500 = get_me_random_list(the_size)
+            start = time.time()
+            sorted_list = sequential_search(mylist500,99999999)
+            time_spent = time.time() - start
+            total_time += time_spent
 
+        avg_time = total_time / 100
+        print(f"Sequential Search sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+        
+        total_time = 0
+        for i in range(100):
+            mylist500 = get_me_random_list(the_size)
+            start = time.time()
+            sorted_list = ordered_sequential_search(mylist500,99999999)
+            time_spent = time.time() - start
+            total_time += time_spent
+
+        avg_time = total_time / 100
+        print(f"Ordered Sequential Search sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+        
+        total_time = 0
+        for i in range(100):
+            mylist = get_me_random_list(the_size)
+            mylist = sorted(mylist)
+
+            start = time.time()
+            check = binary_search_iterative(mylist, 99999999)
+            time_spent = time.time() - start
+            total_time += time_spent
+
+        avg_time = total_time / 100
+        print(f"Binary Search Iterative took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+        total_time = 0
+        for i in range(100):
+            mylist500 = get_me_random_list(the_size)
+            start = time.time()
+            sorted_list = binary_search_recursive(mylist500,99999999)
+            time_spent = time.time() - start
+            total_time += time_spent
+
+        avg_time = total_time / 100
+        print(f"Binary_search_recursive sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+        

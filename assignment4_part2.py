@@ -1,15 +1,10 @@
 import argparse
-# other imports go here
 
 import random
 import time
 
 def get_me_random_list(n):
-    """Generate list of n elements in random order
     
-    :params: n: Number of elements in the list
-    :returns: A list with n elements in random order
-    """
     a_list = list(range(n))
     random.shuffle(a_list)
     return a_list
@@ -52,21 +47,17 @@ def gapInsertionSort(alist, start, gap):
 
 
 def python_sort(a_list):
-    """
-    Use Python built-in sorted function
-    :param a_list:
-    :return: the sorted list
-    """
+    
     return sorted(a_list)
 
 
 if __name__ == "__main__":
-    """Main entry point"""
-    list_sizes = [500, 1000, 5000]
+    
+    list_sizes = [500, 1000, 10000]
 
-    # the_size = list_sizes[0]
 
     for the_size in list_sizes:
+        
         total_time = 0
         for i in range(100):
             mylist500 = get_me_random_list(the_size)
@@ -86,7 +77,27 @@ if __name__ == "__main__":
             time_spent = time.time() - start
             total_time += time_spent
 
-        # Repeat the same loop and use shellSort(...)
-
         avg_time = total_time / 100
         print(f"Insertion sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+
+        total_time = 0
+        for i in range(100):
+            mylist500 = get_me_random_list(the_size)
+            start = time.time()
+            shellSort(mylist500)
+            time_spent = time.time() - start
+            total_time += time_spent
+
+        avg_time = total_time / 100
+        print(f"Shell sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+        
+        total_time = 0
+        for i in range(100):
+            mylist500 = get_me_random_list(the_size)
+            start = time.time()
+            gapInsertionSort(mylist500)
+            time_spent = time.time() - start
+            total_time += time_spent
+
+        avg_time = total_time / 100
+        print(f"Gap Insertion sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
